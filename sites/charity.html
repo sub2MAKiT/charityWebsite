@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        body {
+    background-color: #212121;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+}
+    </style>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script> 
+ 
+</head>
+<body>
+
+    <canvas id="slicesOfPie" style="width:100%;max-width:700px"></canvas> 
+    
+    <script>
+        // I didn't know how to do it properly so... whoops
+        const jsonFile = [{"amount":1.0,"name":"K41E8"},{"amount":1.0,"name":"Stetzels Pretzels"},{"amount":4.97,"name":"Xarve"},{"amount":5.0,"name":"Devin Fourspring"},{"amount":5.0,"name":"Nytro 69"},{"amount":5.0,"name":"Notabas 314"},{"amount":5.0,"name":"Gabriel Pavlovic"},{"amount":5.0,"name":"piller"},{"amount":6.0,"name":"Zentray"},{"amount":6.09,"name":"GamerBoy722"},{"amount":10.0,"name":"Matteo Sacchi"},{"amount":10.0,"name":"Taylor Duncheon"},{"amount":10.0,"name":"Deixa"},{"amount":15.0,"name":"Qand CC"},{"amount":16.07,"name":"A guy"},{"amount":20.0,"name":"mcbckr yes"},{"amount":20.0,"name":"Ethan Gibbons"},{"amount":24.0,"name":"Tory Moghadam"},{"amount":30.0,"name":"dmt_ useless"},{"amount":69.0,"name":"Alex Alani"},{"amount":84.0,"name":"McKinnley Turner"},{"amount":96.60000000000001,"name":"Anonymous"},{"amount":100.0,"name":"Jonathan Hollifield"},{"amount":120.0,"name":"Thaaa"},{"amount":129.0,"name":"Alliana Morgan"},{"amount":200.0,"name":"Stamp"},{"amount":229.0,"name":"AtomicSteel"},{"amount":1309.0,"name":"MAKiT"}];
+
+        let fullData = {"names":[], "amounts":[]};
+        
+        for (let i = jsonFile.length-1; i >0; i--) {
+            fullData["names"].push(jsonFile[i]["name"]);
+            fullData["amounts"].push(jsonFile[i]["amount"]);
+        }
+
+        let  allBarColors = [];
+
+        let barColors = ["#406E8E", "#DB162F", "#43AA8B", "#F3CA40"];
+
+        for (let i = 0; i < fullData["names"].length; i++) {
+            allBarColors.push(barColors[i%5]);
+        } 
+
+        new Chart("slicesOfPie", {
+            type: "pie",
+            data: {
+                labels: fullData["names"],
+                datasets: [{
+                backgroundColor: allBarColors,
+                data: fullData["amounts"]
+                }]
+            },
+            options: {}
+        });
+    </script>
+</body>
+</html>
